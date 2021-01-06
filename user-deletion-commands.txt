@@ -1,0 +1,6 @@
+aws iam remove-user-from-group --user-name LarsAsiasi --group-name Tudengid
+aws iam delete-login-profile --user-name LarsAsiasi
+aws iam delete-user --user-name LarsAsiasi
+aws iam remove-user-from-group --user-name OliverVanamets --group-name Tudengid
+aws iam delete-login-profile --user-name OliverVanamets
+aws iam delete-user --user-name OliverVanamets

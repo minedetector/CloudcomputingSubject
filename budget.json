@@ -1,0 +1,25 @@
+{
+    "BudgetLimit": {
+        "Amount": "100",
+        "Unit": "USD"
+    },
+    "BudgetName": "CLI TEST budget",
+    "BudgetType": "COST",
+    "CostTypes": {
+        "IncludeCredit": true,
+        "IncludeDiscount": true,
+        "IncludeOtherSubscription": true,
+        "IncludeRecurring": true,
+        "IncludeRefund": true,
+        "IncludeSubscription": true,
+        "IncludeSupport": true,
+        "IncludeTax": true,
+        "IncludeUpfront": true,
+        "UseBlended": false
+    },
+    "TimePeriod": {
+        "Start": 1577850853,
+        "End": 1625025253
+    },
+    "TimeUnit": "MONTHLY"
+}

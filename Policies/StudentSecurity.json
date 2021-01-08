@@ -1,0 +1,48 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "ViewPasswordInfo",
+        "Effect": "Allow",
+        "Action": [
+          "iam:GetAccountPasswordPolicy",
+          "iam:GetAccountSummary",
+          "iam:ListAccountAliases"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Sid": "ChangePassword",
+        "Effect": "Allow",
+        "Action": "iam:ChangePassword",
+        "Resource": "arn:aws:iam::538493143704:user/${aws:username}"
+      },
+      {
+        "Sid": "AllowViewAccountInfo",
+        "Effect": "Allow",
+        "Action": "iam:ListVirtualMFADevices",
+        "Resource": "*"
+      },
+      {
+        "Sid": "AllowManageOwnVirtualMFADevice",
+        "Effect": "Allow",
+        "Action": [
+          "iam:CreateVirtualMFADevice",
+          "iam:DeleteVirtualMFADevice"
+        ],
+        "Resource": "arn:aws:iam::538493143704:mfa/${aws:username}"
+      },
+      {
+        "Sid": "AllowManageOwnUserMFA",
+        "Effect": "Allow",
+        "Action": [
+          "iam:DeactivateMFADevice",
+          "iam:EnableMFADevice",
+          "iam:GetUser",
+          "iam:ListMFADevices",
+          "iam:ResyncMFADevice"
+        ],
+        "Resource": "arn:aws:iam::538493143704:user/${aws:username}"
+      }
+    ]
+  }

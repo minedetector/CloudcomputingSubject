@@ -1,0 +1,33 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CreateSnapshot",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateSnapshots",
+                "ec2:CreateSnapshot"
+            ],
+            "Resource": [
+                "arn:aws:ec2:*:*:instance/*",
+                "arn:aws:ec2:*:*:snapshot/*",
+                "arn:aws:ec2:*:*:volume/*"
+            ]
+        },
+        {
+            "Sid": "ManageSnapshot",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DeleteSnapshot",
+                "ec2:CopySnapshot",
+                "ec2:ModifySnapshotAttribute",
+                "ec2:ResetSnapshotAttribute"
+            ],
+            "Resource": [
+                "arn:aws:ec2:*:*:instance/*",
+                "arn:aws:ec2:*:*:snapshot/*",
+                "arn:aws:ec2:*:*:volume/*"
+            ]
+        }
+    ]
+}

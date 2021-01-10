@@ -2,44 +2,224 @@
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "VisualEditor0",
             "Effect": "Allow",
             "Action": [
-                "s3:ListBucketMultipartUploads",
-                "s3:ListBucketVersions",
-                "s3:CreateBucket",
-                "s3:ListBucket",
-                "s3:GetBucketLocation",
-                "s3:DeleteBucket",
-                "s3:PutBucketVersioning"
+                "s3:Get*",
+                "s3:List*"
             ],
-            "Resource": "arn:aws:s3:::*"
+            "Resource": "*"
         },
         {
-            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "s3:CreateBucket",
+                "s3:PutBucketPublicAccessBlock"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:DeleteBucket"
+            ],
+            "Resource": "*"
+        },
+        {
             "Effect": "Allow",
             "Action": [
                 "s3:PutObject",
-                "s3:GetObjectAcl",
-                "s3:GetObject",
-                "s3:DeleteObjectVersion",
-                "s3:PutObjectVersionAcl",
-                "s3:DeleteObject",
                 "s3:PutObjectAcl",
-                "s3:ReplicateDelete",
-                "s3:ListMultipartUploadParts"
+                "s3:DeleteObject",
+                "s3:PutObjectTagging",
+                "s3:DeleteObjectTagging",
+                "s3:PutBucketTagging",
+                "s3:PutBucketVersioning"
             ],
-            "Resource": "arn:aws:s3:::*/*"
+            "Resource": "*"
+        },
+
+        {
+            "Effect": "Allow",
+            "Action": "backup:*",
+            "Resource": "*"
         },
         {
-            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": "backup-storage:*",
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "rds:Describe*",
+                "rds:List*"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "rds:DeleteDBSnapshot",
+                "rds:DeleteDBClusterSnapshot"
+            ],
+            "Effect": "Allow",
+            "Resource": "*",
+            "Condition": {
+                "ForAnyValue:StringEquals": {
+                    "aws:CalledVia": [
+                        "backup.amazonaws.com"
+                    ]
+                }
+            }
+        },
+        {
+            "Action": [
+                "dynamodb:ListBackups",
+                "dynamodb:ListTables"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "dynamodb:DeleteBackup"
+            ],
+            "Effect": "Allow",
+            "Resource": "*",
+            "Condition": {
+                "ForAnyValue:StringEquals": {
+                    "aws:CalledVia": [
+                        "backup.amazonaws.com"
+                    ]
+                }
+            }
+        },
+        {
+            "Action": [
+                "elasticfilesystem:DescribeFilesystems"
+            ],
+            "Resource": "arn:aws:elasticfilesystem:*:*:file-system/*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "ec2:DeleteSnapshot",
+                "ec2:DeregisterImage"
+            ],
+            "Effect": "Allow",
+            "Resource": "*",
+            "Condition": {
+                "ForAnyValue:StringEquals": {
+                    "aws:CalledVia": [
+                        "backup.amazonaws.com"
+                    ]
+                }
+            }
+        },
+        {
+            "Action": [
+                "tag:GetTagKeys",
+                "tag:GetTagValues",
+                "tag:GetResources"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
             "Effect": "Allow",
             "Action": [
-                "s3:ListAllMyBuckets",
-                "s3:ListAccessPoints",
-                "s3:ListJobs",
-                "s3:CreateJob"
+                "storagegateway:List*",
+                "storagegateway:Describe*"
             ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:PassRole",
+                "iam:CreateServiceLinkedRole"
+            ],
+            "Resource": [
+                "arn:aws:iam::*:role/*AwsBackup*",
+                "arn:aws:iam::*:role/*AWSBackup*"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "iam:PassedToService": "backup.amazonaws.com"
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": "organizations:DescribeOrganization",
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "kms:ListKeys",
+                "kms:DescribeKey",
+                "kms:GenerateDataKey",
+                "kms:ListAliases"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "kms:CreateGrant"
+            ],
+            "Effect": "Allow",
+            "Resource": "*",
+            "Condition": {
+                "ForAnyValue:StringEquals": {
+                    "kms:EncryptionContextKeys": "aws:backup:backup-vault"
+                },
+                "Bool": {
+                    "kms:GrantIsForAWSResource": true
+                },
+                "StringLike": {
+                    "kms:ViaService": "backup.*.amazonaws.com"
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:CancelCommand",
+                "ssm:GetCommandInvocation"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "ssm:SendCommand",
+            "Resource": [
+                "arn:aws:ssm:*:*:document/AWSEC2-CreateVssSnapshot",
+                "arn:aws:ec2:*:*:instance/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "fsx:DescribeFileSystems",
+                "fsx:DescribeBackups"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Action": "fsx:DeleteBackup",
+            "Effect": "Allow",
+            "Resource": "arn:aws:fsx:*:*:backup/*",
+            "Condition": {
+                "ForAnyValue:StringEquals": {
+                    "aws:CalledVia": [
+                        "backup.amazonaws.com"
+                    ]
+                }
+            }
+        },
+        {
+            "Action": "ds:DescribeDirectories",
+            "Effect": "Allow",
             "Resource": "*"
         }
     ]

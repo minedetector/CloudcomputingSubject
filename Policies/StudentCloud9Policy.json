@@ -1,0 +1,49 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ReadCloud9",
+            "Effect": "Allow",
+            "Action": [
+                "cloud9:Describe*",
+                "cloud9:Get*",
+                "cloud9:List*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CreateCloud9",
+            "Effect": "Allow",
+            "Action": [
+                "cloud9:CreateEnvironmentEC2",
+                "cloud9:CreateEnvironmentMembership",
+                "cloud9:ValidateEnvironmentName"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "ManageCloud9",
+            "Effect": "Allow",
+            "Action": [
+                "cloud9:DeleteEnvironmentMembership",
+                "cloud9:UpdateEnvironmentMembership",
+                "cloud9:UpdateEnvironment",
+                "cloud9:UpdateUserSettings",
+                "cloud9:DeleteEnvironment"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "iam:CreateServiceLinkedRole",
+            "Resource": "arn:aws:iam::538493143704:role/aws-service-role/cloud9.amazonaws.com/AWSServiceRoleForAWSCloud9",
+            "Condition": {
+                "ForAnyValue:StringEquals": {
+                    "aws:CalledVia": [
+                        "cloud9.amazonaws.com"
+                    ]
+                }
+            }
+        }
+    ]
+}

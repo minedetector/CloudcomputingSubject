@@ -1,22 +1,42 @@
 {
-    "Version": "2012-10-17",
-    "Statement": [
+  "Version": "2012-10-17",
+  "Statement": [
       {
-        "Sid": "VisualEditor0",
-        "Effect": "Allow",
-        "Action": "ec2:CreateTags",
-        "Resource": [
-          "arn:aws:ec2:*:*:*"
-        ],
-        "Condition": {
-          "StringEquals": {
-            "ec2:CreateAction": [
-              "RunInstances",
-              "CreateVolume",
-              "CreateSnapshot"
-            ]
+          "Sid": "AllowTagsOnEC2",
+          "Effect": "Allow",
+          "Action": "ec2:CreateTags",
+          "Resource": "*",
+          "Condition": {
+              "StringEquals": {
+                  "ec2:CreateAction": [
+                      "RunInstances",
+                      "CreateVolume",
+                      "CreateSnapshot",
+                      "CreateKeyPair",
+                      "CreateVpc",
+                      "CreateSubnet",
+                      "CreateRouteTable",
+                      "CreateRoute",
+                      "CreateInternetGateway"
+
+                  ]
+              }
           }
-        }
+      },
+      {
+          "Sid": "AllowTagsOnS3",
+          "Effect": "Allow",
+          "Action": [
+              "s3:CreateTags"
+          ],
+          "Resource": "*",
+          "Condition": {
+              "StringEquals": {
+                  "s3:CreateAction": [
+                      "CreateBucket"
+                  ]
+              }
+          }
       }
-    ]
-  }
+  ]
+}

@@ -19,18 +19,14 @@
         }
       },
       {
-        "Sid": "VisualEditor1",
+        "Sid": "ManageVolume",
         "Effect": "Allow",
         "Action": [
           "ec2:DetachVolume",
           "ec2:AttachVolume",
           "ec2:DeleteVolume",
           "ec2:ModifyVolume",
-          "ec2:ModifyVolumeAttribute",
-          "ec2:DescribeVolumeStatus",
-          "ec2:DescribeVolumes",
-          "ec2:DescribeVolumesModifications",
-          "ec2:DescribeVolumeAttribute"
+          "ec2:ModifyVolumeAttribute"
         ],
         "Resource": "*",
         "Condition": {

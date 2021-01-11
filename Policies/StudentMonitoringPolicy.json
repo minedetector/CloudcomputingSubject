@@ -1,0 +1,61 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ReadAccess",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:DescribeInsightRules",
+                "cloudwatch:GetDashboard",
+                "cloudwatch:GetMetricData",
+                "cloudwatch:GetInsightRuleReport",
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:ListMetrics",
+                "cloudwatch:DescribeAnomalyDetectors",
+                "cloudwatch:DescribeAlarmHistory",
+                "cloudwatch:DescribeAlarmsForMetric",
+                "cloudwatch:ListDashboards",
+                "cloudwatch:ListTagsForResource",
+                "cloudwatch:DescribeAlarms",
+                "cloudwatch:GetMetricWidgetImage"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CreateCloudwatchServices",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:PutDashboard",
+                "cloudwatch:PutAnomalyDetector",
+                "cloudwatch:PutCompositeAlarm",
+                "cloudwatch:PutInsightRule",
+                "cloudwatch:PutMetricAlarm"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "ModifyCloudwatchServicesWithTagCondition",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:EnableInsightRules",
+                "cloudwatch:DisableInsightRules",
+                "cloudwatch:EnableAlarmActions",
+                "cloudwatch:DisableAlarmActions",
+                "cloudwatch:SetAlarmState",
+                "cloudwatch:DeleteAlarms",
+                "cloudwatch:DeleteInsightRules",
+                "cloudwatch:DeleteDashboards",
+                "cloudwatch:DeleteAnomalyDetector"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "ModifyCloudwatchServicesNamespaceCondition",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:PutMetricData"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

@@ -44,6 +44,38 @@
                     ]
                 }
             }
+        },
+        {
+            "Sid": "ReadEKS",
+            "Effect": "Allow",
+            "Action": [
+                "eks:List*",
+                "eks:Describe*",
+                "eks:AccessKubernetesApi"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CreateEKS",
+            "Effect": "Allow",
+            "Action": "eks:CreateCluster",
+            "Resource": "*"
+        },
+        {
+            "Sid": "ManageEKS",
+            "Effect": "Allow",
+            "Action": [
+                "eks:DeleteCluster",
+                "eks:UpdateClusterVersion",
+                "eks:UpdateClusterConfig"
+            ],
+            "Resource": "arn:aws:eks:*:538493143704:cluster/*"
+        },
+        {
+            "Sid": "CreateEKSRole",
+            "Effect": "Allow",
+            "Action": "iam:CreateServiceLinkedRole",
+            "Resource": "arn:aws:iam::538493143704:role/aws-service-role/eks.amazonaws.com/AWSServiceRoleForAmazonEKS"
         }
     ]
 }

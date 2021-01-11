@@ -33,7 +33,8 @@
                 "s3:PutObjectTagging",
                 "s3:DeleteObjectTagging",
                 "s3:PutBucketTagging",
-                "s3:PutBucketVersioning"
+                "s3:PutBucketVersioning",
+                "s3:PutBucketPolicy"
             ],
             "Resource": "*"
         },
@@ -70,14 +71,6 @@
                     ]
                 }
             }
-        },
-        {
-            "Action": [
-                "dynamodb:ListBackups",
-                "dynamodb:ListTables"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
         },
         {
             "Action": [

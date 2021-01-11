@@ -1,0 +1,124 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ReadRDS",
+            "Effect": "Allow",
+            "Action": [
+                "rds:Describe*",
+                "rds:DownloadDBLogFilePortion",
+                "rds:ListTagsForResource"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CreateRDS",
+            "Effect": "Allow",
+            "Action": [
+                "rds:CreateEventSubscription",
+                "rds:CreateDBParameterGroup",
+                "rds:CreateOptionGroup",
+                "rds:CreateDBSubnetGroup",
+                "rds:CreateDBSecurityGroup",
+                "rds:CreateDBSnapshot",
+                "rds:CreateDBProxy",
+                "rds:CreateDBInstanceReadReplica"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowCreateDBInstanceOnly",
+            "Effect": "Allow",
+            "Action": [
+                "rds:CreateDBInstance"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "rds:DatabaseEngine": "mysql",
+                    "rds:DatabaseClass": "db.t2.micro"
+                }
+            }
+        },
+        {
+            "Sid": "ManageRDS",
+            "Effect": "Allow",
+            "Action": [
+                "rds:ModifyOptionGroup",
+                "rds:StartExportTask",
+                "rds:StartActivityStream",
+                "rds:DeleteOptionGroup",
+                "rds:ModifyDBParameterGroup",
+                "rds:DeleteEventSubscription",
+                "rds:ModifyDBProxy",
+                "rds:ModifyDBInstance",
+                "rds:DeleteDBInstance",
+                "rds:CancelExportTask",
+                "rds:ModifyEventSubscription",
+                "rds:DeleteDBSnapshot",
+                "rds:DeleteDBProxy",
+                "rds:DeleteDBInstanceAutomatedBackup",
+                "rds:StopDBInstance",
+                "rds:StartDBInstance",
+                "rds:StopActivityStream",
+                "rds:ModifyDBProxyTargetGroup",
+                "rds:ModifyDBSnapshot",
+                "rds:DeleteDBSubnetGroup",
+                "rds:DeleteDBSecurityGroup",
+                "rds:DeleteDBParameterGroup",
+                "rds:ModifyDBSnapshotAttribute",
+                "rds:ModifyDBSubnetGroup"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "iam:CreateServiceLinkedRole",
+            "Resource": "*",
+            "Condition": {
+              "StringEquals": {
+                "iam:AWSServiceName": "rds.amazonaws.com"
+                }
+            }
+        },
+
+        {
+            "Sid": "ReadDynamoDB",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:Describe*",
+                "dynamodb:List*",
+                "dynamodb:Get*",
+                "dynamodb:PartiQLSelect",
+                "dynamodb:BatchGetItem",
+                "dynamodb:ConditionCheckItem",
+                "dynamodb:Scan",
+                "dynamodb:Query"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CreateDynamoDB",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:CreateTable",
+                "dynamodb:CreateBackup"
+            ],
+            "Resource": "arn:aws:dynamodb:*:538493143704:*"
+        },
+        {
+            "Sid": "ManageDynamoDB",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:PutItem",
+                "dynamodb:RestoreTableFromBackup",
+                "dynamodb:UpdateItem",
+                "dynamodb:UpdateTable",
+                "dynamodb:DeleteTable",
+                "dynamodb:DeleteItem",
+                "dynamodb:DeleteBackup"
+            ],
+            "Resource": "arn:aws:dynamodb:*:538493143704:*"
+        }
+    ]
+}

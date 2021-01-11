@@ -1,42 +1,45 @@
 {
-  "Version": "2012-10-17",
-  "Statement": [
-      {
-          "Sid": "AllowTagsOnEC2",
-          "Effect": "Allow",
-          "Action": "ec2:CreateTags",
-          "Resource": "*",
-          "Condition": {
-              "StringEquals": {
-                  "ec2:CreateAction": [
-                      "RunInstances",
-                      "CreateVolume",
-                      "CreateSnapshot",
-                      "CreateKeyPair",
-                      "CreateVpc",
-                      "CreateSubnet",
-                      "CreateRouteTable",
-                      "CreateRoute",
-                      "CreateInternetGateway"
-
-                  ]
-              }
-          }
-      },
-      {
-          "Sid": "AllowTagsOnS3",
-          "Effect": "Allow",
-          "Action": [
-              "s3:CreateTags"
-          ],
-          "Resource": "*",
-          "Condition": {
-              "StringEquals": {
-                  "s3:CreateAction": [
-                      "CreateBucket"
-                  ]
-              }
-          }
-      }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowTagsOnEC2",
+            "Effect": "Allow",
+            "Action": "ec2:CreateTags",
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "ec2:CreateAction": [
+                        "RunInstances",
+                        "CreateSecurityGroup",
+                        "CreateVolume",
+                        "CreateSnapshot",
+                        "CreateKeyPair",
+                        "CreateVpc",
+                        "CreateSubnet",
+                        "CreateRouteTable",
+                        "CreateRoute",
+                        "CreateInternetGateway",
+                        "CreateLaunchTemplate",
+                        "CreateLaunchTemplateVersion",
+                        "AllocateAddress"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "AllowTagsOnS3",
+            "Effect": "Allow",
+            "Action": [
+                "s3:CreateTags"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "s3:CreateAction": [
+                        "CreateBucket"
+                    ]
+                }
+            }
+        }
+    ]
 }

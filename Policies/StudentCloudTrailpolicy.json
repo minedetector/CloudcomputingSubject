@@ -1,0 +1,67 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "ReadCloudTrail",
+            "Effect": "Allow",
+            "Action": [
+                "cloudtrail:LookupEvents",
+                "cloudtrail:GetTrail",
+                "cloudtrail:ListTrails",
+                "cloudtrail:GetTrailStatus",
+                "cloudtrail:GetEventSelectors",
+                "cloudtrail:DescribeTrails",
+                "cloudtrail:ListPublicKeys",
+                "cloudtrail:ListTags",
+                "cloudtrail:GetInsightSelectors"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CreateCloudtrail",
+            "Effect": "Allow",
+            "Action": [
+                "cloudtrail:CreateTrail"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "ManageCloudTrail",
+            "Effect": "Allow",
+            "Action": [
+                "cloudtrail:PutEventSelectors",
+                "cloudtrail:StartLogging",
+                "cloudtrail:StopLogging",
+                "cloudtrail:UpdateTrail",
+                "cloudtrail:DeleteTrail",
+                "cloudtrail:PutInsightSelectors"
+            ],
+            "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": "iam:CreateServiceLinkedRole",
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "iam:AWSServiceName": "cloudtrail.amazonaws.com"
+              }
+          }
+      },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "kms:ListKeys",
+            "kms:ListAliases"
+          ],
+          "Resource": "*"
+        }
+    ]
+}

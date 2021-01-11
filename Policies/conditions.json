@@ -3,5 +3,15 @@
     		"StringEquals": {
         		"ec2:ResourceTag/User": "{aws:username}"
     		}
-	}
+	},
+	"Statement": {
+        "Effect": "Allow",
+        "Resource": "*",
+        "Action": "cloudwatch:PutMetricData",
+        "Condition": {
+            "StringEquals": {
+                "cloudwatch:namespace": "MyCustomNamespace"
+            }
+        }
+    }
 }

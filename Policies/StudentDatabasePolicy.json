@@ -69,7 +69,12 @@
                 "rds:ModifyDBSnapshotAttribute",
                 "rds:ModifyDBSubnetGroup"
             ],
-            "Resource": "*"
+            "Resource": "*",
+            "Condition":{
+                "StringEquals":{
+                   "rds:db-tag/User": "${aws:username}"
+                }
+             }
         },
         {
             "Effect": "Allow",
@@ -86,14 +91,34 @@
             "Sid": "ReadDynamoDB",
             "Effect": "Allow",
             "Action": [
-                "dynamodb:Describe*",
-                "dynamodb:List*",
-                "dynamodb:Get*",
+                "dynamodb:ListTables",
+                "dynamodb:DescribeContributorInsights",
+                "dynamodb:ListTagsOfResource",
+                "dynamodb:DescribeReservedCapacityOfferings",
                 "dynamodb:PartiQLSelect",
+                "dynamodb:DescribeTable",
+                "dynamodb:GetItem",
+                "dynamodb:DescribeContinuousBackups",
+                "dynamodb:DescribeExport",
+                "dynamodb:DescribeKinesisStreamingDestination",
+                "dynamodb:ListExports",
+                "dynamodb:DescribeLimits",
                 "dynamodb:BatchGetItem",
                 "dynamodb:ConditionCheckItem",
+                "dynamodb:ListBackups",
                 "dynamodb:Scan",
-                "dynamodb:Query"
+                "dynamodb:DescribeStream",
+                "dynamodb:DescribeTimeToLive",
+                "dynamodb:ListStreams",
+                "dynamodb:ListContributorInsights",
+                "dynamodb:DescribeGlobalTableSettings",
+                "dynamodb:ListGlobalTables",
+                "dynamodb:GetShardIterator",
+                "dynamodb:DescribeGlobalTable",
+                "dynamodb:DescribeReservedCapacity",
+                "dynamodb:DescribeBackup",
+                "dynamodb:GetRecords",
+                "dynamodb:DescribeTableReplicaAutoScaling"
             ],
             "Resource": "*"
         },
@@ -116,9 +141,23 @@
                 "dynamodb:UpdateTable",
                 "dynamodb:DeleteTable",
                 "dynamodb:DeleteItem",
-                "dynamodb:DeleteBackup"
+                "dynamodb:DeleteBackup",
+                "dynamodb:Query"
             ],
             "Resource": "arn:aws:dynamodb:*:538493143704:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:PassRole",
+                "iam:CreateServiceLinkedRole"
+            ],
+            "Resource": "*",
+            "Condition": {
+              "StringEquals": {
+                "iam:AWSServiceName": "dynamodb.amazonaws.com"
+                }
+            }
         }
     ]
 }

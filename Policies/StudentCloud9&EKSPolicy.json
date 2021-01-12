@@ -31,7 +31,12 @@
                 "cloud9:UpdateUserSettings",
                 "cloud9:DeleteEnvironment"
             ],
-            "Resource": "*"
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "ec2:ResourceTag/User": "${aws:username}"
+                }
+            }
         },
         {
             "Effect": "Allow",
@@ -74,7 +79,9 @@
         {
             "Sid": "CreateEKSRole",
             "Effect": "Allow",
-            "Action": "iam:CreateServiceLinkedRole",
+            "Action": [
+                "iam:CreateServiceLinkedRole",
+                "iam:ListRoles"],
             "Resource": "arn:aws:iam::538493143704:role/aws-service-role/eks.amazonaws.com/AWSServiceRoleForAmazonEKS"
         }
     ]

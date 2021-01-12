@@ -40,6 +40,29 @@
                 "s3:PutObjectTagging"
             ],
             "Resource": "arn:aws:s3:::*/*"
+        },
+        {
+            "Sid": "TagRDS",
+            "Effect": "Allow",
+            "Action": "rds:AddTagsToResource",
+            "Resource" : "*",
+            "Condition" : { 
+                "streq" : { 
+                    "rds:req-tag/User" : "${aws:username}"
+                }
+            }
+        },
+        {
+            "Sid": "TagDynamoDB",
+            "Effect": "Allow",
+            "Action": "dynamodb:TagResource",
+            "Resource": "*"
+        },
+        {
+            "Sid": "TagCloud9",
+            "Effect": "Allow",
+            "Action": "cloud9:TagResource",
+            "Resource": "*"
         }
     ]
 }

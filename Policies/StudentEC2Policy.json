@@ -51,7 +51,14 @@
             "ec2:CreateLaunchTemplate",
             "ec2:CreateLaunchTemplateVersion"
         ],
-        "Resource": "*"
+        "Resource": "*",
+        "Condition": {
+          "StringLikeIfExists": {
+              "ec2:InstanceType": [
+                  "t2.micro"
+              ]
+          }
+      }
       },
       {
         "Sid": "ManageTemplate",
@@ -61,7 +68,12 @@
             "ec2:ModifyLaunchTemplate",
             "ec2:DeleteLaunchTemplateVersions"
         ],
-        "Resource": "*"
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "ec2:ResourceTag/User": "${aws:username}"
+          }
+        }
       },
       {
         "Sid": "AllowToViewRoles",
@@ -94,14 +106,12 @@
         }
       },
       {
-          "Sid": "CreateSecurityGroups",
-          "Effect": "Allow",
-          "Action": [
-              "ec2:CreateSecurityGroup"
-          ],
-          "Resource": [
-              "*"
-          ]
+        "Sid": "CreateSecurityGroups",
+        "Effect": "Allow",
+        "Action": [
+          "ec2:CreateSecurityGroup"
+        ],
+        "Resource": "*"
       },
       {
           "Sid": "ManageSecurityGroups",
@@ -113,9 +123,12 @@
               "ec2:RevokeSecurityGroupEgress",
               "ec2:RevokeSecurityGroupIngress"
           ],
-          "Resource": [
-            "*"
-          ]
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "ec2:ResourceTag/User": "${aws:username}"
+            }
+          }
       },
 
       {

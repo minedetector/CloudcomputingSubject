@@ -27,19 +27,19 @@
             }
         },
         {
-            "Sid": "AllowTagsOnS3",
+            "Sid": "TagS3Bucket",
+            "Effect": "Allow",
+            "Action": "s3:PutBucketTagging",
+            "Resource": "arn:aws:s3:::*"
+        },
+        {
+            "Sid": "TagS3Objects",
             "Effect": "Allow",
             "Action": [
-                "s3:CreateTags"
+                "s3:PutObjectVersionTagging",
+                "s3:PutObjectTagging"
             ],
-            "Resource": "*",
-            "Condition": {
-                "StringEquals": {
-                    "s3:CreateAction": [
-                        "CreateBucket"
-                    ]
-                }
-            }
+            "Resource": "arn:aws:s3:::*/*"
         }
     ]
 }

@@ -83,11 +83,7 @@
                 "kms:ListAliases",
                 "kms:DescribeKey",
                 "kms:CreateKey",
-                "kms:CreateAlias",
-                "cloudwatch:DescribeAlarms",
-                "cloudwatch:PutMetricAlarm",
-                "cloudwatch:DeleteAlarms",
-                "cloudwatch:GetMetricStatistics"
+                "kms:CreateAlias"
             ],
             "Resource": "*"
         },

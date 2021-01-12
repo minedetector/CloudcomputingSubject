@@ -5,19 +5,9 @@
             "Sid": "ReadAccess",
             "Effect": "Allow",
             "Action": [
-                "cloudwatch:DescribeInsightRules",
-                "cloudwatch:GetDashboard",
-                "cloudwatch:GetMetricData",
-                "cloudwatch:GetInsightRuleReport",
-                "cloudwatch:GetMetricStatistics",
-                "cloudwatch:ListMetrics",
-                "cloudwatch:DescribeAnomalyDetectors",
-                "cloudwatch:DescribeAlarmHistory",
-                "cloudwatch:DescribeAlarmsForMetric",
-                "cloudwatch:ListDashboards",
-                "cloudwatch:ListTagsForResource",
-                "cloudwatch:DescribeAlarms",
-                "cloudwatch:GetMetricWidgetImage"
+                "cloudwatch:Describe*",
+                "cloudwatch:Get*",
+                "cloudwatch:List*"
             ],
             "Resource": "*"
         },
@@ -47,7 +37,12 @@
                 "cloudwatch:DeleteDashboards",
                 "cloudwatch:DeleteAnomalyDetector"
             ],
-            "Resource": "*"
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "cloudwatch:ResourceTag/User": "${aws:username}"
+                }
+            }
         },
         {
             "Sid": "ModifyCloudwatchServicesNamespaceCondition",

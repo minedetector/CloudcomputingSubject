@@ -27,6 +27,26 @@
             }
         },
         {
+            "Sid": "TagLoadBalancer",
+            "Effect": "Allow",
+            "Action": [
+                "elasticloadbalancing:AddTags"
+            ],
+            "Resource": "*"    
+        },
+        {
+            "Sid": "TagCloudWatch",
+            "Effect": "Allow",
+            "Action": "cloudwatch:TagResource",
+            "Resource": "*"
+        },
+        {
+            "Sid": "TagCloudTrail",
+            "Effect": "Allow",
+            "Action": "cloudtrail:AddTags",
+            "Resource": "*"
+        },
+        {
             "Sid": "TagS3Bucket",
             "Effect": "Allow",
             "Action": "s3:PutBucketTagging",
@@ -40,6 +60,14 @@
                 "s3:PutObjectTagging"
             ],
             "Resource": "arn:aws:s3:::*/*"
+        },
+        {
+            "Sid": "TagBackup",
+            "Effect": "Allow",
+            "Action": [
+                "backup:TagResource"
+            ],
+            "Resource": "*"
         },
         {
             "Sid": "TagRDS",

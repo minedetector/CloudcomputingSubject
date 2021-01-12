@@ -199,14 +199,17 @@
         },
         {
           "Effect": "Allow",
-          "Action": "elasticloadbalancing:*",
+          "Action": "elasticloadbalancing:Describe*",
           "Resource": "*"
         },
         {
           "Sid": "CreateLoadBalancer",
           "Effect": "Allow",
           "Action": [
-              "elasticloadbalancing:CreateLoadBalancer"
+              "elasticloadbalancing:CreateLoadBalancer",
+              "elasticloadbalancing:CreateListener",
+              "elasticloadbalancing:CreateRule",
+              "elasticloadbalancing:CreateTargetGroup"
           ],
           "Resource": "*"    
         },
@@ -214,7 +217,18 @@
           "Sid": "ManageLoadBalancer",
           "Effect": "Allow",
           "Action": [
-              "elasticloadbalancing:CreateLoadBalancer"
+              "elasticloadbalancing:DeleteListener",
+              "elasticloadbalancing:DeleteLoadBalancer",
+              "elasticloadbalancing:DeleteRule",
+              "elasticloadbalancing:DeleteTargetGroup",
+              "elasticloadbalancing:ModifyListener",
+              "elasticloadbalancing:ModifyLoadBalancerAttributes",
+              "elasticloadbalancing:ModifyRule",
+              "elasticloadbalancing:ModifyTargetGroupAttributes",
+              "elasticloadbalancing:RegisterTargets",
+              "elasticloadbalancing:SetIpAddressType",
+              "elasticloadbalancing:SetSecurityGroups",
+              "elasticloadbalancing:SetSubnets"
           ],
           "Resource": "*"
       },

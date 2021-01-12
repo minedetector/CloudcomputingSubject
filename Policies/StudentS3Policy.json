@@ -32,8 +32,44 @@
         },
 
         {
+            "Sid": "ReadBackup",
             "Effect": "Allow",
-            "Action": "backup:*",
+            "Action": [
+                "backup:List*",
+                "backup:Describe*",
+                "backup:Get*",
+                "backup:ExportBackupPlanTemplate"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CreateBackup",
+            "Effect": "Allow",
+            "Action": [
+                "backup:CreateBackupSelection",
+                "backup:CreateBackupVault",
+                "backup:CreateBackupPlan"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "ManageBackup",
+            "Effect": "Allow",
+            "Action": [
+                "backup:PutBackupVaultAccessPolicy",
+                "backup:StopBackupJob",
+                "backup:DeleteBackupVaultAccessPolicy",
+                "backup:StartBackupJob",
+                "backup:DeleteBackupVault",
+                "backup:StartRestoreJob",
+                "backup:UpdateBackupPlan",
+                "backup:StartCopyJob",
+                "backup:DeleteBackupPlan",
+                "backup:PutBackupVaultNotifications",
+                "backup:DeleteBackupSelection",
+                "backup:DeleteBackupVaultNotifications",
+                "backup:DeleteRecoveryPoint"
+            ],
             "Resource": "*"
         },
         {

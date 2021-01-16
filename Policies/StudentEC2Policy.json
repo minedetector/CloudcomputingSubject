@@ -1,102 +1,129 @@
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ssm:Describe*",
-                "ec2:Describe*",
-                "ec2:Get*",
-                "cloudwatch:DescribeAlarms"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "CreateInstance",
-            "Effect": "Allow",
-            "Action": [
-                "ec2:RunInstances"
-            ],
-            "Resource": [
-                "arn:aws:ec2:*:*:*",
-                "arn:aws:cloudwatch:*:538493143704:alarm:*"
-            ],
-            "Condition": {
-                "StringLikeIfExists": {
-                    "ec2:InstanceType": [
-                        "t2.micro"
-                    ]
-                }
-            }
-        },
-        {
-            "Sid": "ManageInstance",
-            "Effect": "Allow",
-            "Action": [
-                "ec2:TerminateInstances",
-                "ec2:StopInstances",
-                "ec2:StartInstances"
-            ],
-            "Resource": "*",
-            "Condition": {
-                "StringEquals": {
-                    "ec2:ResourceTag/User": "${aws:username}"
-                }
-            }
-        },
-        {
-          "Sid": "CreateTemplate",
+  "Version": "2012-10-17",
+  "Statement": [
+      {
+          "Sid": "ReadEC2andSSM",
           "Effect": "Allow",
           "Action": [
-              "ec2:CreateLaunchTemplate",
-              "ec2:CreateLaunchTemplateVersion"
-          ],
-          "Resource": "*",
-          "Condition": {
-            "StringLikeIfExists": {
-                "ec2:InstanceType": [
-                    "t2.micro"
-                ]
-            }
-        }
-        },
-        {
-          "Sid": "ManageTemplate",
-          "Effect": "Allow",
-          "Action": [
-              "ec2:DeleteLaunchTemplate",
-              "ec2:ModifyLaunchTemplate",
-              "ec2:DeleteLaunchTemplateVersions"
-          ],
-          "Resource": "*",
-          "Condition": {
-            "StringEquals": {
-              "ec2:ResourceTag/User": "${aws:username}"
-            }
-          }
-        },
-        {
-          "Sid": "AllowToViewRoles",
-          "Effect": "Allow",
-          "Action": [
-              "iam:PassRole",
-              "iam:ListInstanceProfiles"
+              "ssm:Get*",
+              "ssm:Describe*",
+              "ec2:Describe*",
+              "ec2:Get*",
+              "cloudwatch:DescribeAlarms"
           ],
           "Resource": "*"
-        },
-        {
-        "Sid": "AllowToCreateKeyPair",
+      },
+      {
+          "Sid": "CreateInstance",
+          "Effect": "Allow",
+          "Action": [
+              "ec2:RunInstances"
+          ],
+          "Resource": [
+              "arn:aws:ec2:*:*:*",
+              "arn:aws:cloudwatch:*:538493143704:alarm:*"
+          ],
+          "Condition": {
+              "StringLikeIfExists": {
+                  "ec2:InstanceType": [
+                      "t2.micro"
+                  ]
+              }
+          }
+      },
+      {
+          "Sid": "ManageInstance",
+          "Effect": "Allow",
+          "Action": [
+              "ec2:TerminateInstances",
+              "ec2:StopInstances",
+              "ec2:StartInstances"
+          ],
+          "Resource": "*",
+          "Condition": {
+              "StringEquals": {
+                  "ec2:ResourceTag/User": "${aws:username}"
+              }
+          }
+      },
+      {
+        "Sid": "CreateTemplate",
         "Effect": "Allow",
         "Action": [
-            "ec2:CreateKeyPair"
-            ],
+            "ec2:CreateLaunchTemplate",
+            "ec2:CreateLaunchTemplateVersion"
+        ],
+        "Resource": "*",
+        "Condition": {
+          "StringLikeIfExists": {
+              "ec2:InstanceType": [
+                  "t2.micro"
+              ]
+          }
+      }
+      },
+      {
+        "Sid": "ManageTemplate",
+        "Effect": "Allow",
+        "Action": [
+            "ec2:DeleteLaunchTemplate",
+            "ec2:ModifyLaunchTemplate",
+            "ec2:DeleteLaunchTemplateVersions"
+        ],
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "ec2:ResourceTag/User": "${aws:username}"
+          }
+        }
+      },
+      {
+        "Sid": "AllowToViewRoles",
+        "Effect": "Allow",
+        "Action": [
+            "iam:PassRole",
+            "iam:ListInstanceProfiles"
+        ],
         "Resource": "*"
-        },
-        {
-          "Sid": "ManageKeyPairs",
+      },
+      {
+      "Sid": "AllowToCreateKeyPair",
+      "Effect": "Allow",
+      "Action": [
+          "ec2:CreateKeyPair"
+          ],
+      "Resource": "*"
+      },
+      {
+        "Sid": "ManageKeyPairs",
+        "Effect": "Allow",
+        "Action": [
+            "ec2:DeleteKeyPair"
+        ],
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "ec2:ResourceTag/User": "${aws:username}"
+          }
+        }
+      },
+      {
+        "Sid": "CreateSecurityGroups",
+        "Effect": "Allow",
+        "Action": [
+          "ec2:CreateSecurityGroup"
+        ],
+        "Resource": "*"
+      },
+      {
+          "Sid": "ManageSecurityGroups",
           "Effect": "Allow",
           "Action": [
-              "ec2:DeleteKeyPair"
+              "ec2:AuthorizeSecurityGroupEgress",
+              "ec2:AuthorizeSecurityGroupIngress",
+              "ec2:DeleteSecurityGroup",
+              "ec2:RevokeSecurityGroupEgress",
+              "ec2:RevokeSecurityGroupIngress"
           ],
           "Resource": "*",
           "Condition": {
@@ -104,220 +131,216 @@
               "ec2:ResourceTag/User": "${aws:username}"
             }
           }
-        },
-        {
-          "Sid": "CreateSecurityGroups",
-          "Effect": "Allow",
-          "Action": [
-            "ec2:CreateSecurityGroup"
-          ],
-          "Resource": "*"
-        },
-        {
-            "Sid": "ManageSecurityGroups",
-            "Effect": "Allow",
-            "Action": [
-                "ec2:AuthorizeSecurityGroupEgress",
-                "ec2:AuthorizeSecurityGroupIngress",
-                "ec2:DeleteSecurityGroup",
-                "ec2:RevokeSecurityGroupEgress",
-                "ec2:RevokeSecurityGroupIngress"
-            ],
-            "Resource": "*",
-            "Condition": {
-              "StringEquals": {
-                "ec2:ResourceTag/User": "${aws:username}"
-              }
-            }
-        },
-
-        {
-            "Sid": "CreateSnapshot",
-            "Effect": "Allow",
-            "Action": [
-                "ec2:CreateSnapshots",
-                "ec2:CreateSnapshot"
-            ],
-            "Resource": [
-                "arn:aws:ec2:*:*:*"
-            ]
-        },
-        {
-            "Sid": "ManageSnapshot",
-            "Effect": "Allow",
-            "Action": [
-                "ec2:DeleteSnapshot",
-                "ec2:CopySnapshot",
-                "ec2:ModifySnapshotAttribute",
-                "ec2:ResetSnapshotAttribute",
-                "ec2:ImportSnapshot"
-            ],
-            "Resource": [
-                "arn:aws:ec2:*:*:*"
-            ],
-            "Condition": {
-              "StringEquals": {
-                "ec2:ResourceTag/User": "${aws:username}"
-              }
-            }
-        },
-
-
-        {
-            "Sid": "AllowRunInstancesWithRestrictions",
-            "Effect": "Allow",
-            "Action": "ec2:CreateVolume",
-            "Resource": [
-              "arn:aws:ec2:*:*:volume/*",
-              "arn:aws:ec2:*:*:instance/*"
-            ],
-            "Condition": {
-              "StringEquals": {
-                "aws:RequestTag/User": "${aws:username}"
-              },
-              "ForAllValues:StringEquals": {
-                "aws:TagKeys": "User"
-              }
-            }
-          },
-          {
-            "Sid": "ManageVolume",
-            "Effect": "Allow",
-            "Action": [
-              "ec2:DetachVolume",
-              "ec2:AttachVolume",
-              "ec2:DeleteVolume",
-              "ec2:ModifyVolume",
-              "ec2:ModifyVolumeAttribute"
-            ],
-            "Resource": "*",
-            "Condition": {
-              "StringEquals": {
-                "ec2:ResourceTag/User": "${aws:username}"
-              }
-            }
-        },
-        {
-          "Effect": "Allow",
-          "Action": "elasticloadbalancing:Describe*",
-          "Resource": "*"
-        },
-        {
-          "Sid": "CreateLoadBalancer",
-          "Effect": "Allow",
-          "Action": [
-              "elasticloadbalancing:CreateLoadBalancer",
-              "elasticloadbalancing:CreateListener",
-              "elasticloadbalancing:CreateRule",
-              "elasticloadbalancing:CreateTargetGroup"
-          ],
-          "Resource": "*"    
-        },
-        {
-          "Sid": "ManageLoadBalancer",
-          "Effect": "Allow",
-          "Action": [
-              "elasticloadbalancing:DeleteListener",
-              "elasticloadbalancing:DeleteLoadBalancer",
-              "elasticloadbalancing:DeleteRule",
-              "elasticloadbalancing:DeleteTargetGroup",
-              "elasticloadbalancing:ModifyListener",
-              "elasticloadbalancing:ModifyLoadBalancerAttributes",
-              "elasticloadbalancing:ModifyRule",
-              "elasticloadbalancing:ModifyTargetGroupAttributes",
-              "elasticloadbalancing:RegisterTargets",
-              "elasticloadbalancing:SetIpAddressType",
-              "elasticloadbalancing:SetSecurityGroups",
-              "elasticloadbalancing:SetSubnets"
-          ],
-          "Resource": "*"
       },
-        {
+
+      {
+          "Sid": "CreateSnapshot",
           "Effect": "Allow",
           "Action": [
-            "cognito-idp:DescribeUserPoolClient"
-          ],
-          "Resource": "*"
-        },
-        {
-          "Effect": "Allow",
-          "Action": "iam:CreateServiceLinkedRole",
-          "Resource": "*",
-          "Condition": {
-            "StringEquals": {
-              "iam:AWSServiceName": "elasticloadbalancing.amazonaws.com"
-            }
-          }
-        },
-        {
-          "Sid": "ReadAutoScaling",
-          "Effect": "Allow",
-          "Action": [
-              "autoscaling:Describe*"
-          ],
-          "Resource": "*"
-        },
-        {
-          "Sid": "CreateAutoScaling",
-          "Effect": "Allow",
-          "Action": [
-              "autoscaling:CreateLaunchConfiguration",
-              "autoscaling:CreateAutoScalingGroup"
+              "ec2:CreateSnapshots",
+              "ec2:CreateSnapshot"
           ],
           "Resource": [
-              "arn:aws:autoscaling:*:538493143704:launchConfiguration:*:*",
-              "arn:aws:autoscaling:*:538493143704:autoScalingGroup:*:*"
-          ],
-          "Condition":{
-            "StringLikeIfExists": {
-              "autoscaling:InstanceTypes": [
-                "t2.micro"
-              ]
-          }
-          }
-      },
-        {
-          "Sid": "ManageAutoScaling",
-          "Effect": "Allow",
-          "Action": [
-              "autoscaling:AttachLoadBalancers",
-              "autoscaling:DetachLoadBalancers",
-              "autoscaling:BatchPutScheduledUpdateGroupAction",
-              "autoscaling:ResumeProcesses",
-              "autoscaling:SetDesiredCapacity",
-              "autoscaling:DetachLoadBalancerTargetGroups",
-              "autoscaling:SuspendProcesses",
-              "autoscaling:ExecutePolicy",
-              "autoscaling:DeletePolicy",
-              "autoscaling:StartInstanceRefresh",
-              "autoscaling:PutScheduledUpdateGroupAction",
-              "autoscaling:AttachLoadBalancerTargetGroups",
-              "autoscaling:AttachInstances",
-              "autoscaling:DeleteLaunchConfiguration",
-              "autoscaling:SetInstanceProtection",
-              "autoscaling:PutScalingPolicy",
-              "autoscaling:UpdateAutoScalingGroup",
-              "autoscaling:DeleteAutoScalingGroup",
-              "autoscaling:CancelInstanceRefresh",
-              "autoscaling:SetInstanceHealth",
-              "autoscaling:DeleteLifecycleHook",
-              "autoscaling:TerminateInstanceInAutoScalingGroup",
-              "autoscaling:DetachInstances"
-          ],
-          "Resource": [
-              "arn:aws:autoscaling:*:538493143704:launchConfiguration:*:*",
-              "arn:aws:autoscaling:*:538493143704:autoScalingGroup:*:*"
+              "arn:aws:ec2:*:*:*"
           ]
+      },
+      {
+          "Sid": "ManageSnapshot",
+          "Effect": "Allow",
+          "Action": [
+              "ec2:DeleteSnapshot",
+              "ec2:CopySnapshot",
+              "ec2:ModifySnapshotAttribute",
+              "ec2:ResetSnapshotAttribute",
+              "ec2:ImportSnapshot"
+          ],
+          "Resource": [
+              "arn:aws:ec2:*:*:*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "ec2:ResourceTag/User": "${aws:username}"
+            }
+          }
+      },
+
+
+      {
+          "Sid": "AllowRunInstancesWithRestrictions",
+          "Effect": "Allow",
+          "Action": "ec2:CreateVolume",
+          "Resource": [
+            "arn:aws:ec2:*:*:volume/*",
+            "arn:aws:ec2:*:*:instance/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:RequestTag/User": "${aws:username}"
+            },
+            "ForAllValues:StringEquals": {
+              "aws:TagKeys": "User"
+            }
+          }
         },
         {
+          "Sid": "ManageVolume",
           "Effect": "Allow",
-          "Action": "iam:CreateServiceLinkedRole",
+          "Action": [
+            "ec2:DetachVolume",
+            "ec2:AttachVolume",
+            "ec2:DeleteVolume",
+            "ec2:ModifyVolume",
+            "ec2:ModifyVolumeAttribute"
+          ],
           "Resource": "*",
           "Condition": {
             "StringEquals": {
-              "iam:AWSServiceName": "autoscaling.amazonaws.com"
-              }
+              "ec2:ResourceTag/User": "${aws:username}"
+            }
           }
-      }
-      ]
+      },
+      {
+        "Sid": "CreateAMI",
+        "Effect": "Allow",
+        "Action": [
+          "ec2:CreateImage"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Sid": "ManageAMI",
+        "Effect": "Allow",
+        "Action": [
+          "ec2:DeregisterImage"
+        ],
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "ec2:ResourceTag/User": "${aws:username}"
+          }
+        }
+      },
+      {
+        "Effect": "Allow",
+        "Action": "elasticloadbalancing:Describe*",
+        "Resource": "*"
+      },
+      {
+        "Sid": "CreateLoadBalancer",
+        "Effect": "Allow",
+        "Action": [
+            "elasticloadbalancing:CreateLoadBalancer",
+            "elasticloadbalancing:CreateListener",
+            "elasticloadbalancing:CreateRule",
+            "elasticloadbalancing:CreateTargetGroup"
+        ],
+        "Resource": "*"    
+      },
+      {
+        "Sid": "ManageLoadBalancer",
+        "Effect": "Allow",
+        "Action": [
+            "elasticloadbalancing:DeleteListener",
+            "elasticloadbalancing:DeleteLoadBalancer",
+            "elasticloadbalancing:DeleteRule",
+            "elasticloadbalancing:DeleteTargetGroup",
+            "elasticloadbalancing:ModifyListener",
+            "elasticloadbalancing:ModifyLoadBalancerAttributes",
+            "elasticloadbalancing:ModifyRule",
+            "elasticloadbalancing:ModifyTargetGroupAttributes",
+            "elasticloadbalancing:RegisterTargets",
+            "elasticloadbalancing:SetIpAddressType",
+            "elasticloadbalancing:SetSecurityGroups",
+            "elasticloadbalancing:SetSubnets"
+        ],
+        "Resource": "*"
+    },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "cognito-idp:DescribeUserPoolClient"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": "iam:CreateServiceLinkedRole",
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "iam:AWSServiceName": "elasticloadbalancing.amazonaws.com"
+          }
+        }
+      },
+      {
+        "Sid": "ReadAutoScaling",
+        "Effect": "Allow",
+        "Action": [
+            "autoscaling:Describe*"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Sid": "CreateAutoScaling",
+        "Effect": "Allow",
+        "Action": [
+            "autoscaling:CreateLaunchConfiguration",
+            "autoscaling:CreateAutoScalingGroup"
+        ],
+        "Resource": [
+            "arn:aws:autoscaling:*:538493143704:launchConfiguration:*:*",
+            "arn:aws:autoscaling:*:538493143704:autoScalingGroup:*:*"
+        ],
+        "Condition":{
+          "StringLikeIfExists": {
+            "autoscaling:InstanceTypes": [
+              "t2.micro"
+            ]
+        }
+        }
+    },
+      {
+        "Sid": "ManageAutoScaling",
+        "Effect": "Allow",
+        "Action": [
+            "autoscaling:AttachLoadBalancers",
+            "autoscaling:DetachLoadBalancers",
+            "autoscaling:BatchPutScheduledUpdateGroupAction",
+            "autoscaling:ResumeProcesses",
+            "autoscaling:SetDesiredCapacity",
+            "autoscaling:DetachLoadBalancerTargetGroups",
+            "autoscaling:SuspendProcesses",
+            "autoscaling:ExecutePolicy",
+            "autoscaling:DeletePolicy",
+            "autoscaling:StartInstanceRefresh",
+            "autoscaling:PutScheduledUpdateGroupAction",
+            "autoscaling:AttachLoadBalancerTargetGroups",
+            "autoscaling:AttachInstances",
+            "autoscaling:DeleteLaunchConfiguration",
+            "autoscaling:SetInstanceProtection",
+            "autoscaling:PutScalingPolicy",
+            "autoscaling:UpdateAutoScalingGroup",
+            "autoscaling:DeleteAutoScalingGroup",
+            "autoscaling:CancelInstanceRefresh",
+            "autoscaling:SetInstanceHealth",
+            "autoscaling:DeleteLifecycleHook",
+            "autoscaling:TerminateInstanceInAutoScalingGroup",
+            "autoscaling:DetachInstances"
+        ],
+        "Resource": [
+            "arn:aws:autoscaling:*:538493143704:launchConfiguration:*:*",
+            "arn:aws:autoscaling:*:538493143704:autoScalingGroup:*:*"
+        ]
+      },
+      {
+        "Effect": "Allow",
+        "Action": "iam:CreateServiceLinkedRole",
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "iam:AWSServiceName": "autoscaling.amazonaws.com"
+            }
+        }
+    }
+    ]
 }

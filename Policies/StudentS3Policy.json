@@ -26,11 +26,12 @@
                 "s3:PutBucketVersioning",
                 "s3:PutBucketPolicy",
                 "s3:DeleteBucket",
-                "s3:PutBucketPublicAccessBlock"
+                "s3:PutBucketPublicAccessBlock",
+                "s3:PutBucketWebsite"
             ],
-            "Resource": "*"
+            "Resource": "*",
+            "Condition": {"Null": {"aws:MultiFactorAuthAge": true }}
         },
-
         {
             "Sid": "ReadBackup",
             "Effect": "Allow",

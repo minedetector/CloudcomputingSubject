@@ -1,6 +1,6 @@
 aws iam create-user --user-name LarsAsiasi
-aws iam create-login-profile --user-name LarsAsiasi --password 'LarsAsiasi1!' --password-reset-required
+aws iam create-login-profile --user-name LarsAsiasi --password 'LarsAsiasi36657' --password-reset-required
 aws iam add-user-to-group --user-name LarsAsiasi --group-name  Tudengid
 aws iam create-user --user-name OliverVanamets
-aws iam create-login-profile --user-name OliverVanamets --password 'OliverVanamets1!' --password-reset-required
+aws iam create-login-profile --user-name OliverVanamets --password 'OliverVanamets87118' --password-reset-required
 aws iam add-user-to-group --user-name OliverVanamets --group-name  Tudengid

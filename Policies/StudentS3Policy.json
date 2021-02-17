@@ -80,14 +80,6 @@
         },
         {
             "Action": [
-                "rds:Describe*",
-                "rds:List*"
-            ],
-            "Effect": "Allow",
-            "Resource": "*"
-        },
-        {
-            "Action": [
                 "rds:DeleteDBSnapshot",
                 "rds:DeleteDBClusterSnapshot"
             ],
@@ -222,8 +214,8 @@
         {
             "Effect": "Allow",
             "Action": [
-                "fsx:DescribeFileSystems",
-                "fsx:DescribeBackups"
+                "fsx:Describe*",
+                "ds:Describe*"
             ],
             "Resource": "*"
         },
@@ -238,11 +230,6 @@
                     ]
                 }
             }
-        },
-        {
-            "Action": "ds:DescribeDirectories",
-            "Effect": "Allow",
-            "Resource": "*"
         }
     ]
 }

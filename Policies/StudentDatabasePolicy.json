@@ -7,7 +7,7 @@
             "Action": [
                 "rds:Describe*",
                 "rds:DownloadDBLogFilePortion",
-                "rds:ListTagsForResource"
+                "rds:List*"
             ],
             "Resource": "*"
         },

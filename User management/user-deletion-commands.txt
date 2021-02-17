@@ -1,6 +1,141 @@
-aws iam remove-user-from-group --user-name LarsAsiasi --group-name Tudengid
-aws iam delete-login-profile --user-name LarsAsiasi
-aws iam delete-user --user-name LarsAsiasi
-aws iam remove-user-from-group --user-name OliverVanamets --group-name Tudengid
-aws iam delete-login-profile --user-name OliverVanamets
-aws iam delete-user --user-name OliverVanamets
+aws iam remove-user-from-group --user-name stadov --group-name Tudengid
+aws iam delete-login-profile --user-name stadov
+aws iam delete-user --user-name stadov
+aws iam remove-user-from-group --user-name andani --group-name Tudengid
+aws iam delete-login-profile --user-name andani
+aws iam delete-user --user-name andani
+aws iam remove-user-from-group --user-name judino --group-name Tudengid
+aws iam delete-login-profile --user-name judino
+aws iam delete-user --user-name judino
+aws iam remove-user-from-group --user-name aiehas --group-name Tudengid
+aws iam delete-login-profile --user-name aiehas
+aws iam delete-user --user-name aiehas
+aws iam remove-user-from-group --user-name reelle --group-name Tudengid
+aws iam delete-login-profile --user-name reelle
+aws iam delete-user --user-name reelle
+aws iam remove-user-from-group --user-name foforh --group-name Tudengid
+aws iam delete-login-profile --user-name foforh
+aws iam delete-user --user-name foforh
+aws iam remove-user-from-group --user-name krgumb --group-name Tudengid
+aws iam delete-login-profile --user-name krgumb
+aws iam delete-user --user-name krgumb
+aws iam remove-user-from-group --user-name jevgeni.jurtsenko1 --group-name Tudengid
+aws iam delete-login-profile --user-name jevgeni.jurtsenko1
+aws iam delete-user --user-name jevgeni.jurtsenko1
+aws iam remove-user-from-group --user-name ajurge --group-name Tudengid
+aws iam delete-login-profile --user-name ajurge
+aws iam delete-user --user-name ajurge
+aws iam remove-user-from-group --user-name makalg --group-name Tudengid
+aws iam delete-login-profile --user-name makalg
+aws iam delete-user --user-name makalg
+aws iam remove-user-from-group --user-name lkaseo --group-name Tudengid
+aws iam delete-login-profile --user-name lkaseo
+aws iam delete-user --user-name lkaseo
+aws iam remove-user-from-group --user-name kenneth.koch --group-name Tudengid
+aws iam delete-login-profile --user-name kenneth.koch
+aws iam delete-user --user-name kenneth.koch
+aws iam remove-user-from-group --user-name dekons --group-name Tudengid
+aws iam delete-login-profile --user-name dekons
+aws iam delete-user --user-name dekons
+aws iam remove-user-from-group --user-name andkuu --group-name Tudengid
+aws iam delete-login-profile --user-name andkuu
+aws iam delete-user --user-name andkuu
+aws iam remove-user-from-group --user-name ekallo --group-name Tudengid
+aws iam delete-login-profile --user-name ekallo
+aws iam delete-user --user-name ekallo
+aws iam remove-user-from-group --user-name mlaane --group-name Tudengid
+aws iam delete-login-profile --user-name mlaane
+aws iam delete-user --user-name mlaane
+aws iam remove-user-from-group --user-name genlee --group-name Tudengid
+aws iam delete-login-profile --user-name genlee
+aws iam delete-user --user-name genlee
+aws iam remove-user-from-group --user-name dalees --group-name Tudengid
+aws iam delete-login-profile --user-name dalees
+aws iam delete-user --user-name dalees
+aws iam remove-user-from-group --user-name marlin --group-name Tudengid
+aws iam delete-login-profile --user-name marlin
+aws iam delete-user --user-name marlin
+aws iam remove-user-from-group --user-name mart.madissoon --group-name Tudengid
+aws iam delete-login-profile --user-name mart.madissoon
+aws iam delete-user --user-name mart.madissoon
+aws iam remove-user-from-group --user-name armili --group-name Tudengid
+aws iam delete-login-profile --user-name armili
+aws iam delete-user --user-name armili
+aws iam remove-user-from-group --user-name alamag --group-name Tudengid
+aws iam delete-login-profile --user-name alamag
+aws iam delete-user --user-name alamag
+aws iam remove-user-from-group --user-name siniin --group-name Tudengid
+aws iam delete-login-profile --user-name siniin
+aws iam delete-user --user-name siniin
+aws iam remove-user-from-group --user-name allan.paalo --group-name Tudengid
+aws iam delete-login-profile --user-name allan.paalo
+aws iam delete-user --user-name allan.paalo
+aws iam remove-user-from-group --user-name kepaju --group-name Tudengid
+aws iam delete-login-profile --user-name kepaju
+aws iam delete-user --user-name kepaju
+aws iam remove-user-from-group --user-name marpee --group-name Tudengid
+aws iam delete-login-profile --user-name marpee
+aws iam delete-user --user-name marpee
+aws iam remove-user-from-group --user-name mpille --group-name Tudengid
+aws iam delete-login-profile --user-name mpille
+aws iam delete-user --user-name mpille
+aws iam remove-user-from-group --user-name krpint --group-name Tudengid
+aws iam delete-login-profile --user-name krpint
+aws iam delete-user --user-name krpint
+aws iam remove-user-from-group --user-name jupukk --group-name Tudengid
+aws iam delete-login-profile --user-name jupukk
+aws iam delete-user --user-name jupukk
+aws iam remove-user-from-group --user-name hepuna --group-name Tudengid
+aws iam delete-login-profile --user-name hepuna
+aws iam delete-user --user-name hepuna
+aws iam remove-user-from-group --user-name jpolda --group-name Tudengid
+aws iam delete-login-profile --user-name jpolda
+aws iam delete-user --user-name jpolda
+aws iam remove-user-from-group --user-name ulrand --group-name Tudengid
+aws iam delete-login-profile --user-name ulrand
+aws iam delete-user --user-name ulrand
+aws iam remove-user-from-group --user-name ovreba --group-name Tudengid
+aws iam delete-login-profile --user-name ovreba
+aws iam delete-user --user-name ovreba
+aws iam remove-user-from-group --user-name jelasm --group-name Tudengid
+aws iam delete-login-profile --user-name jelasm
+aws iam delete-user --user-name jelasm
+aws iam remove-user-from-group --user-name tasaar --group-name Tudengid
+aws iam delete-login-profile --user-name tasaar
+aws iam delete-user --user-name tasaar
+aws iam remove-user-from-group --user-name tsaarj --group-name Tudengid
+aws iam delete-login-profile --user-name tsaarj
+aws iam delete-user --user-name tsaarj
+aws iam remove-user-from-group --user-name mesisa --group-name Tudengid
+aws iam delete-login-profile --user-name mesisa
+aws iam delete-user --user-name mesisa
+aws iam remove-user-from-group --user-name msumla --group-name Tudengid
+aws iam delete-login-profile --user-name msumla
+aws iam delete-user --user-name msumla
+aws iam remove-user-from-group --user-name rasuur --group-name Tudengid
+aws iam delete-login-profile --user-name rasuur
+aws iam delete-user --user-name rasuur
+aws iam remove-user-from-group --user-name helent --group-name Tudengid
+aws iam delete-login-profile --user-name helent
+aws iam delete-user --user-name helent
+aws iam remove-user-from-group --user-name frteea --group-name Tudengid
+aws iam delete-login-profile --user-name frteea
+aws iam delete-user --user-name frteea
+aws iam remove-user-from-group --user-name matoro --group-name Tudengid
+aws iam delete-login-profile --user-name matoro
+aws iam delete-user --user-name matoro
+aws iam remove-user-from-group --user-name jantreier --group-name Tudengid
+aws iam delete-login-profile --user-name jantreier
+aws iam delete-user --user-name jantreier
+aws iam remove-user-from-group --user-name frturm --group-name Tudengid
+aws iam delete-login-profile --user-name frturm
+aws iam delete-user --user-name frturm
+aws iam remove-user-from-group --user-name kristjanvaik --group-name Tudengid
+aws iam delete-login-profile --user-name kristjanvaik
+aws iam delete-user --user-name kristjanvaik
+aws iam remove-user-from-group --user-name jvalge --group-name Tudengid
+aws iam delete-login-profile --user-name jvalge
+aws iam delete-user --user-name jvalge
+aws iam remove-user-from-group --user-name vaziga --group-name Tudengid
+aws iam delete-login-profile --user-name vaziga
+aws iam delete-user --user-name vaziga

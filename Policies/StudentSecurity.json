@@ -118,7 +118,7 @@
         "Condition": {
           "ArnEquals": {
               "iam:PolicyARN": [
-                  "arn:aws:iam::*:policy/${aws:username}"
+                  "arn:aws:iam::*:policy/${aws:username}*"
                   ]
               }
           }
@@ -131,7 +131,7 @@
           "iam:DeletePolicyVersion",
           "iam:DeletePolicy"
         ],
-        "Resource":"arn:aws:iam::538493143704:policy/${aws:username}"
+        "Resource":"arn:aws:iam::538493143704:policy/${aws:username}*"
       },
       {
         "Sid": "CreateGroup",
@@ -168,7 +168,8 @@
         "Effect": "Allow",
         "Action": [
             "iam:CreateRole",
-            "iam:CreateInstanceProfile"
+            "iam:CreateInstanceProfile",
+            "iam:AddRoleToInstanceProfile"
         ],
         "Resource": "*"
       },
@@ -179,13 +180,22 @@
           "iam:AttachRolePolicy",  
           "iam:DetachRolePolicy",
           "iam:DeleteRolePolicy",
-          "iam:DeleteRole",
-          "iam:AddRoleToInstanceProfile"
-            
+          "iam:DeleteRole"
         ],
         "Resource": [
-          "arn:aws:iam::538493143704:role/${aws:username}",
-          "arn:aws:iam::538493143704:user/${aws:username}"]
+          "arn:aws:iam::538493143704:role/${aws:username}*",
+          "arn:aws:iam::538493143704:user/${aws:username}"
+        ]
+    },
+    {
+      "Effect": "Deny",
+      "Action": "*",
+      "Resource": "*",
+      "Condition": {
+          "StringNotEquals": {
+              "aws:RequestedRegion": "us-east-1"
+          }
+        }       
     }
     ]
   }

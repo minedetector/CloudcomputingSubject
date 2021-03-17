@@ -30,7 +30,11 @@
                 "s3:PutBucketWebsite"
             ],
             "Resource": "*",
-            "Condition": {"Null": {"aws:MultiFactorAuthAge": true }}
+            "Condition": {
+                "BoolIfExists": {
+                    "aws:MultiFactorAuthPresent": "true"
+                }
+            }
         },
         {
             "Sid": "ReadBackup",

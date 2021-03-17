@@ -4,7 +4,10 @@
         {
             "Sid": "AllowTagIAM",
             "Effect": "Allow",
-            "Action": "iam:TagPolicy",
+            "Action": [
+                "iam:TagPolicy",
+                "iam:TagRole"
+                ],
             "Resource": "*"
         },
         {
@@ -28,7 +31,8 @@
                         "CreateInternetGateway",
                         "CreateLaunchTemplate",
                         "CreateLaunchTemplateVersion",
-                        "AllocateAddress"
+                        "AllocateAddress",
+                        "CreateNatGateway"
                     ]
                 }
             }

@@ -116,6 +116,24 @@
         "Resource": "*"
       },
       {
+        "Sid": "AllowTagsOnEC2",
+        "Effect": "Allow",
+        "Action": [
+          "ec2:AuthorizeSecurityGroupEgress",
+          "ec2:AuthorizeSecurityGroupIngress",
+          "ec2:RevokeSecurityGroupEgress",
+          "ec2:RevokeSecurityGroupIngress"
+        ],
+        "Resource": "*",
+        "Condition": {
+            "StringEquals": {
+                "ec2:CreateAction": [
+                  "CreateSecurityGroup"
+                ]
+            }
+        }
+      },
+      {
           "Sid": "ManageSecurityGroups",
           "Effect": "Allow",
           "Action": [

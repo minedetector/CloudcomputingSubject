@@ -8,26 +8,24 @@
                 "ec2:CreateSubnet",
                 "ec2:CreateRouteTable",
                 "ec2:CreateRoute",
-                "ec2:CreateInternetGateway",
-                "ec2:AttachInternetGateway"
+                "ec2:CreateNatGateway"
             ],
             "Resource": "*"
         },
         {
             "Effect": "Allow",
             "Action": [
-                "ec2:DeleteVpc",
                 "ec2:DeleteSubnet",
                 "ec2:DeleteRouteTable",
                 "ec2:DeleteRoute",
-                "ec2:DeleteInternetGateway",
                 "ec2:ReplaceRoute",
                 "ec2:ModifyVpc*",
                 "ec2:RejectVpc*",
                 "ec2:AssociateRouteTable",
                 "ec2:AssociateSubnetCidrBlock",
                 "ec2:DisassociateSubnetCidrBlock",
-                "ec2:ModifySubnetAttribute"
+                "ec2:ModifySubnetAttribute",
+                "ec2:AttachInternetGateway"
             ],
             "Resource": "*",
             "Condition": {
@@ -65,32 +63,17 @@
             }
         },
         {
-            "Sid": "Route53Permissions",
+            "Sid": "ManageNatGateway",
             "Effect": "Allow",
             "Action": [
-                "route53:*",
-                "route53domains:*",
-                "cloudfront:ListDistributions",
-                "elasticloadbalancing:DescribeLoadBalancers",
-                "elasticbeanstalk:DescribeEnvironments",
-                "ec2:CreateNetworkInterface",
-                "ec2:CreateNetworkInterfacePermission",
-                "ec2:DeleteNetworkInterface",
-                "ec2:ModifyNetworkInterfaceAttribute",
-                "sns:ListTopics",
-                "sns:ListSubscriptionsByTopic",
-                "sns:CreateTopic",
-                "kms:ListAliases",
-                "kms:DescribeKey",
-                "kms:CreateKey",
-                "kms:CreateAlias"
+                "ec2:DeleteNatGateway"
             ],
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": "apigateway:GET",
-            "Resource": "arn:aws:apigateway:*:*:*"
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "ec2:ResourceTag/User": "${aws:username}"
+                }
+            }
         }
     ]
 }

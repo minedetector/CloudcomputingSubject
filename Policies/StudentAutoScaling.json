@@ -1,0 +1,127 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+    "Effect": "Allow",
+    "Action": "elasticloadbalancing:Describe*",
+    "Resource": "*"
+  },
+  {
+    "Sid": "CreateLoadBalancer",
+    "Effect": "Allow",
+    "Action": [
+        "elasticloadbalancing:CreateLoadBalancer",
+        "elasticloadbalancing:CreateListener",
+        "elasticloadbalancing:CreateRule",
+        "elasticloadbalancing:CreateTargetGroup"
+    ],
+    "Resource": "*"    
+  },
+  {
+    "Sid": "ManageLoadBalancer",
+    "Effect": "Allow",
+    "Action": [
+        "elasticloadbalancing:DeleteListener",
+        "elasticloadbalancing:DeleteLoadBalancer",
+        "elasticloadbalancing:DeleteRule",
+        "elasticloadbalancing:DeleteTargetGroup",
+        "elasticloadbalancing:ModifyListener",
+        "elasticloadbalancing:ModifyLoadBalancerAttributes",
+        "elasticloadbalancing:ModifyRule",
+        "elasticloadbalancing:ModifyTargetGroupAttributes",
+        "elasticloadbalancing:RegisterTargets",
+        "elasticloadbalancing:SetIpAddressType",
+        "elasticloadbalancing:SetSecurityGroups",
+        "elasticloadbalancing:SetSubnets"
+    ],
+    "Resource": "*"
+},
+  {
+    "Effect": "Allow",
+    "Action": [
+      "cognito-idp:DescribeUserPoolClient"
+    ],
+    "Resource": "*"
+  },
+  {
+    "Effect": "Allow",
+    "Action": "iam:CreateServiceLinkedRole",
+    "Resource": "*",
+    "Condition": {
+      "StringEquals": {
+        "iam:AWSServiceName": "elasticloadbalancing.amazonaws.com"
+      }
+    }
+  },
+  {
+    "Sid": "ReadAutoScaling",
+    "Effect": "Allow",
+    "Action": [
+        "autoscaling:Describe*"
+    ],
+    "Resource": "*"
+  },
+  {
+    "Sid": "CreateAutoScaling",
+    "Effect": "Allow",
+    "Action": [
+        "autoscaling:CreateLaunchConfiguration",
+        "autoscaling:CreateAutoScalingGroup"
+    ],
+    "Resource": [
+        "arn:aws:autoscaling:*:538493143704:launchConfiguration:*:*",
+        "arn:aws:autoscaling:*:538493143704:autoScalingGroup:*:*"
+    ],
+    "Condition":{
+      "StringLikeIfExists": {
+        "autoscaling:InstanceTypes": [
+          "t2.micro"
+        ]
+    }
+    }
+},
+  {
+    "Sid": "ManageAutoScaling",
+    "Effect": "Allow",
+    "Action": [
+        "autoscaling:AttachLoadBalancers",
+        "autoscaling:DetachLoadBalancers",
+        "autoscaling:BatchPutScheduledUpdateGroupAction",
+        "autoscaling:ResumeProcesses",
+        "autoscaling:SetDesiredCapacity",
+        "autoscaling:DetachLoadBalancerTargetGroups",
+        "autoscaling:SuspendProcesses",
+        "autoscaling:ExecutePolicy",
+        "autoscaling:DeletePolicy",
+        "autoscaling:StartInstanceRefresh",
+        "autoscaling:PutScheduledUpdateGroupAction",
+        "autoscaling:AttachLoadBalancerTargetGroups",
+        "autoscaling:AttachInstances",
+        "autoscaling:DeleteLaunchConfiguration",
+        "autoscaling:SetInstanceProtection",
+        "autoscaling:PutScalingPolicy",
+        "autoscaling:UpdateAutoScalingGroup",
+        "autoscaling:DeleteAutoScalingGroup",
+        "autoscaling:CancelInstanceRefresh",
+        "autoscaling:SetInstanceHealth",
+        "autoscaling:DeleteLifecycleHook",
+        "autoscaling:TerminateInstanceInAutoScalingGroup",
+        "autoscaling:DetachInstances"
+    ],
+    "Resource": [
+        "arn:aws:autoscaling:*:538493143704:launchConfiguration:*:*",
+        "arn:aws:autoscaling:*:538493143704:autoScalingGroup:*:*"
+    ]
+  },
+  {
+    "Effect": "Allow",
+    "Action": "iam:CreateServiceLinkedRole",
+    "Resource": "*",
+    "Condition": {
+      "StringEquals": {
+        "iam:AWSServiceName": "autoscaling.amazonaws.com"
+        }
+    }
+}
+]
+}

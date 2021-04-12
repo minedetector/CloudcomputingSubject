@@ -47,6 +47,16 @@
           }
       },
       {
+        "Effect": "Allow",
+        "Action": "iam:CreateServiceLinkedRole",
+        "Resource": "*",
+        "Condition": {
+          "StringEquals": {
+            "iam:AWSServiceName": "spot.amazonaws.com"
+          }
+        }
+      },
+      {
         "Sid": "CreateTemplate",
         "Effect": "Allow",
         "Action": [
@@ -82,7 +92,9 @@
         "Effect": "Allow",
         "Action": [
             "iam:PassRole",
-            "iam:ListInstanceProfiles"
+            "iam:ListInstanceProfiles",
+            "ec2:AssociateIamInstanceProfile",
+            "ec2:DisassociateIamInstanceProfile"
         ],
         "Resource": "*"
       },
@@ -141,7 +153,9 @@
               "ec2:AuthorizeSecurityGroupIngress",
               "ec2:DeleteSecurityGroup",
               "ec2:RevokeSecurityGroupEgress",
-              "ec2:RevokeSecurityGroupIngress"
+              "ec2:RevokeSecurityGroupIngress",
+              "ec2:ModifyInstanceAttribute",
+              "ec2:ModifyNetworkInterfaceAttribute"
           ],
           "Resource": "*",
           "Condition": {
@@ -150,7 +164,6 @@
             }
           }
       },
-
       {
           "Sid": "CreateSnapshot",
           "Effect": "Allow",
@@ -181,8 +194,6 @@
             }
           }
       },
-
-
       {
           "Sid": "AllowRunInstancesWithRestrictions",
           "Effect": "Allow",
@@ -237,128 +248,8 @@
             "ec2:ResourceTag/User": "${aws:username}"
           }
         }
-      },
-      {
-        "Effect": "Allow",
-        "Action": "elasticloadbalancing:Describe*",
-        "Resource": "*"
-      },
-      {
-        "Sid": "CreateLoadBalancer",
-        "Effect": "Allow",
-        "Action": [
-            "elasticloadbalancing:CreateLoadBalancer",
-            "elasticloadbalancing:CreateListener",
-            "elasticloadbalancing:CreateRule",
-            "elasticloadbalancing:CreateTargetGroup"
-        ],
-        "Resource": "*"    
-      },
-      {
-        "Sid": "ManageLoadBalancer",
-        "Effect": "Allow",
-        "Action": [
-            "elasticloadbalancing:DeleteListener",
-            "elasticloadbalancing:DeleteLoadBalancer",
-            "elasticloadbalancing:DeleteRule",
-            "elasticloadbalancing:DeleteTargetGroup",
-            "elasticloadbalancing:ModifyListener",
-            "elasticloadbalancing:ModifyLoadBalancerAttributes",
-            "elasticloadbalancing:ModifyRule",
-            "elasticloadbalancing:ModifyTargetGroupAttributes",
-            "elasticloadbalancing:RegisterTargets",
-            "elasticloadbalancing:SetIpAddressType",
-            "elasticloadbalancing:SetSecurityGroups",
-            "elasticloadbalancing:SetSubnets"
-        ],
-        "Resource": "*"
-    },
-      {
-        "Effect": "Allow",
-        "Action": [
-          "cognito-idp:DescribeUserPoolClient"
-        ],
-        "Resource": "*"
-      },
-      {
-        "Effect": "Allow",
-        "Action": "iam:CreateServiceLinkedRole",
-        "Resource": "*",
-        "Condition": {
-          "StringEquals": {
-            "iam:AWSServiceName": "elasticloadbalancing.amazonaws.com"
-          }
-        }
-      },
-      {
-        "Sid": "ReadAutoScaling",
-        "Effect": "Allow",
-        "Action": [
-            "autoscaling:Describe*"
-        ],
-        "Resource": "*"
-      },
-      {
-        "Sid": "CreateAutoScaling",
-        "Effect": "Allow",
-        "Action": [
-            "autoscaling:CreateLaunchConfiguration",
-            "autoscaling:CreateAutoScalingGroup"
-        ],
-        "Resource": [
-            "arn:aws:autoscaling:*:538493143704:launchConfiguration:*:*",
-            "arn:aws:autoscaling:*:538493143704:autoScalingGroup:*:*"
-        ],
-        "Condition":{
-          "StringLikeIfExists": {
-            "autoscaling:InstanceTypes": [
-              "t2.micro"
-            ]
-        }
-        }
-    },
-      {
-        "Sid": "ManageAutoScaling",
-        "Effect": "Allow",
-        "Action": [
-            "autoscaling:AttachLoadBalancers",
-            "autoscaling:DetachLoadBalancers",
-            "autoscaling:BatchPutScheduledUpdateGroupAction",
-            "autoscaling:ResumeProcesses",
-            "autoscaling:SetDesiredCapacity",
-            "autoscaling:DetachLoadBalancerTargetGroups",
-            "autoscaling:SuspendProcesses",
-            "autoscaling:ExecutePolicy",
-            "autoscaling:DeletePolicy",
-            "autoscaling:StartInstanceRefresh",
-            "autoscaling:PutScheduledUpdateGroupAction",
-            "autoscaling:AttachLoadBalancerTargetGroups",
-            "autoscaling:AttachInstances",
-            "autoscaling:DeleteLaunchConfiguration",
-            "autoscaling:SetInstanceProtection",
-            "autoscaling:PutScalingPolicy",
-            "autoscaling:UpdateAutoScalingGroup",
-            "autoscaling:DeleteAutoScalingGroup",
-            "autoscaling:CancelInstanceRefresh",
-            "autoscaling:SetInstanceHealth",
-            "autoscaling:DeleteLifecycleHook",
-            "autoscaling:TerminateInstanceInAutoScalingGroup",
-            "autoscaling:DetachInstances"
-        ],
-        "Resource": [
-            "arn:aws:autoscaling:*:538493143704:launchConfiguration:*:*",
-            "arn:aws:autoscaling:*:538493143704:autoScalingGroup:*:*"
-        ]
-      },
-      {
-        "Effect": "Allow",
-        "Action": "iam:CreateServiceLinkedRole",
-        "Resource": "*",
-        "Condition": {
-          "StringEquals": {
-            "iam:AWSServiceName": "autoscaling.amazonaws.com"
-            }
-        }
-    }
+      }
     ]
-}
+  }
+
+      

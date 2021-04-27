@@ -34,7 +34,12 @@
         "elasticloadbalancing:SetSecurityGroups",
         "elasticloadbalancing:SetSubnets"
     ],
-    "Resource": "*"
+    "Resource": [
+      "arn:aws:elasticloadbalancing:*:538493143704:listener*",
+      "arn:aws:elasticloadbalancing:*:538493143704:targetgroup/${aws:username}*/*",
+      "arn:aws:elasticloadbalancing:*:538493143704:loadbalancer/net/${aws:username}*/*",
+      "arn:aws:elasticloadbalancing:*:538493143704:loadbalancer/app/${aws:username}*/*"
+  ]
 },
   {
     "Effect": "Allow",
@@ -57,7 +62,25 @@
     "Sid": "ReadAutoScaling",
     "Effect": "Allow",
     "Action": [
-        "autoscaling:Describe*"
+      "autoscaling:DescribeAutoScalingNotificationTypes",
+      "autoscaling:DescribeLifecycleHookTypes",
+      "autoscaling:DescribeAutoScalingInstances",
+      "autoscaling:DescribeTerminationPolicyTypes",
+      "autoscaling:DescribeScalingProcessTypes",
+      "autoscaling:DescribePolicies",
+      "autoscaling:DescribeTags",
+      "autoscaling:DescribeLaunchConfigurations",
+      "autoscaling:DescribeMetricCollectionTypes",
+      "autoscaling:DescribeLoadBalancers",
+      "autoscaling:DescribeLifecycleHooks",
+      "autoscaling:DescribeAdjustmentTypes",
+      "autoscaling:DescribeScalingActivities",
+      "autoscaling:DescribeAutoScalingGroups",
+      "autoscaling:DescribeAccountLimits",
+      "autoscaling:DescribeScheduledActions",
+      "autoscaling:DescribeLoadBalancerTargetGroups",
+      "autoscaling:DescribeNotificationConfigurations",
+      "autoscaling:DescribeInstanceRefreshes"
     ],
     "Resource": "*"
   },
@@ -99,18 +122,18 @@
         "autoscaling:AttachInstances",
         "autoscaling:DeleteLaunchConfiguration",
         "autoscaling:SetInstanceProtection",
-        "autoscaling:PutScalingPolicy",
         "autoscaling:UpdateAutoScalingGroup",
         "autoscaling:DeleteAutoScalingGroup",
         "autoscaling:CancelInstanceRefresh",
+        "autoscaling:PutScalingPolicy",
         "autoscaling:SetInstanceHealth",
         "autoscaling:DeleteLifecycleHook",
         "autoscaling:TerminateInstanceInAutoScalingGroup",
         "autoscaling:DetachInstances"
     ],
     "Resource": [
-        "arn:aws:autoscaling:*:538493143704:launchConfiguration:*:*",
-        "arn:aws:autoscaling:*:538493143704:autoScalingGroup:*:*"
+        "arn:aws:autoscaling:*:538493143704:launchConfiguration:*:*${aws:username}*",
+        "arn:aws:autoscaling:*:538493143704:autoScalingGroup:*:*${aws:username}*"
     ]
   },
   {

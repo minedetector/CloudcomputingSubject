@@ -1,9 +1,9 @@
 {
     "BudgetLimit": {
-        "Amount": "100",
+        "Amount": "500",
         "Unit": "USD"
     },
-    "BudgetName": "CLI TEST budget",
+    "BudgetName": "Student account budget",
     "BudgetType": "COST",
     "CostTypes": {
         "IncludeCredit": true,
